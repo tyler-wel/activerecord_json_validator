@@ -6,6 +6,7 @@ require "active_support/all"
 require "rspec"
 require "mysql2"
 require "pg"
+require "pry"
 
 require "activerecord_json_validator"
 

@@ -51,13 +51,18 @@ describe JsonValidator do
     let(:record_errors) { double(:errors) }
     let(:value) { double(:value) }
     let(:schema) { double(:schema) }
+    let(:schemer_schema) { double(:schemer_schema) }
     let(:validatable_value) { double(:validatable_value) }
+    let(:validated_value) { double(:validated_value) }
     let(:validator_errors) { double(:validator_errors) }
 
     before do
       expect(validator).to receive(:schema).with(record).and_return(schema)
       expect(validator).to receive(:validatable_value).with(value).and_return(validatable_value)
-      expect(::JSON::Validator).to receive(:fully_validate).with(schema, validatable_value, options[:options]).and_return(validator_errors)
+      # expect(::JSON::Validator).to receive(:fully_validate).with(schema, validatable_value, options[:options]).and_return(validator_errors)
+      expect(JSONSchemer).to receive(:schema).with(schema).and_return(schemer_schema)
+      expect(schemer_schema).to receive(:validate).with(validatable_value).and_return(validated_value)
+      expect(validated_value).to receive(:to_a).and_return(validator_errors)
     end
 
     context "with JSON::Validator errors" do
