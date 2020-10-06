@@ -1,4 +1,5 @@
 Copyright (c) 2013-2016, Mirego
+Copyright (c) 2020, Tyler Welsh
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
