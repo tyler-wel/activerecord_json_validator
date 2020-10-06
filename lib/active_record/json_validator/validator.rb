@@ -26,7 +26,7 @@ class JsonValidator < ActiveModel::EachValidator
     end
   end
 
-protected
+  protected
 
   # Redefine the setter method for the attributes, since we want to
   # catch JSON parsing errors.

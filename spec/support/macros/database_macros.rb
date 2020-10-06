@@ -4,10 +4,10 @@ module DatabaseMacros
   # Run migrations in the test database
   def run_migration(&block)
     migration_class = if ActiveRecord::Migration.respond_to?(:[])
-                        ActiveRecord::Migration[4.2]
-                      else
-                        ActiveRecord::Migration
-                      end
+      ActiveRecord::Migration[4.2]
+    else
+      ActiveRecord::Migration
+    end
 
     # Create a new migration class
     klass = Class.new(migration_class)

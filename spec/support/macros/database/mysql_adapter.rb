@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require_relative 'database_adapter'
+require_relative "database_adapter"
 
 class Mysql2Adapter < DatabaseAdapter
   def database_configuration
     {
-      adapter: 'mysql2',
+      adapter: "mysql2",
       database: @database,
-      username: 'travis',
-      encoding: 'utf8'
+      username: "public",
+      encoding: "utf8"
     }
   end
 
