@@ -27,7 +27,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "standard"
   spec.add_development_dependency "pry-byebug"
 
-  spec.add_dependency "json-schema", "~> 2.8"
   spec.add_dependency "json_schemer"
   spec.add_dependency "activerecord", ">= 4.2.0", "< 7"
 end
