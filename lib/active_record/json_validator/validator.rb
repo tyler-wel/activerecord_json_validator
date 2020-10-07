@@ -2,7 +2,7 @@
 
 class JsonValidator < ActiveModel::EachValidator
   def initialize(options)
-    options.reverse_merge!(message: :invalid_json)
+    options.reverse_merge!(message: nil)
     options.reverse_merge!(schema: nil)
     options.reverse_merge!(options: {})
     @attributes = options[:attributes]
@@ -22,9 +22,8 @@ class JsonValidator < ActiveModel::EachValidator
     # Everything is good if we don’t have any errors and we got valid JSON value
     return if errors.empty? && record.send(:"#{attribute}_invalid_json").blank?
 
-    # Add error message to the attribute
-    message(errors).each do |error|
-      record.errors.add(attribute, error, value: value)
+    errors.each do |error|
+      record.errors.add(attribute, message, error: error)
     end
   end
 
@@ -69,12 +68,7 @@ class JsonValidator < ActiveModel::EachValidator
     ::ActiveSupport::JSON.encode(value)
   end
 
-  def message(errors)
-    message = options.fetch(:message)
-
-    case message
-      when Proc then [message.call(errors)].flatten if message.is_a?(Proc)
-      else [message]
-    end
+  def message
+    @message ||= options.fetch(:message) || :invalid_json
   end
 end
